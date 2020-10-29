@@ -40,8 +40,9 @@ class Point():
     self.y_coord = self.y_coord + y
   
   def plot(self):
-    """This should be able to produce sth on a canvas but I don't know how to do so... (doge)"""
-    
+    """This should be able to produce sth on a canvas but I don't know if it will work"""
+    plt.scatter(self.x_coord,self.y_coord)
+
 class Line():
   """2d line defined by 2 points"""
   
@@ -63,9 +64,14 @@ class Line():
   
   def lenth(self):
     """returns lenth of line"""
+    return self.p1.distance(self.p2)
+  
+  def plot(self):
+    x = [self.p1.x_coord , self.p2.x_coord]
+    y = [self.p2.y_coord , self.p2.y_coord]
+    plt.plot(x,y)
 
-
-def Math_Vector():
+class Math_Vector():
   """2d math vector"""
   
   def __init__(self , empieza , finaliza):
