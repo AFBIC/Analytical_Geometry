@@ -2,6 +2,7 @@
 # The name was just for convenience.
 import matplotlib
 import math
+import exeption
 from matplotlib import pyplot as plt
 
 def swap(arguno , argdos):
@@ -49,7 +50,8 @@ class Line():
   
   def __init__(self , alpha , beta):
     """Initializers should be points."""
-    
+    if (alpha == beta):
+      raise ValueError("The two points must be different.")
     self.p1 = alpha
     self.p2 = beta
     
@@ -59,9 +61,14 @@ class Line():
   def __ne__(self , otro):
     return !(self == otro)
   
+  def slope(self):
+    if (self.p1.x_coord == self.p2.x_coord):
+      return float("inf")
+    else return (self.p1.y_coord - self.p2.y_coord) / (self.p1.x_coord - self.p2.x_coord)
+  
   def is_parallel(self , otro):
     """sees if self and otro are parallel lines"""
-    
+    return self.slope() == otro.slope
   
   def lenth(self):
     """returns lenth of line"""
