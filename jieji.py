@@ -35,7 +35,7 @@ class Point():
     
     return math.sqrt(((self.x_coord - other.x_coord)**2) + ((self.y_coord - other.y_coord)**2))
   
-  def move(self , x , y):
+  def move(self , x=0 , y=0):
     """moves point x units up and y units down"""
     
     self.x_coord = self.x_coord + x
@@ -68,7 +68,7 @@ class Line():
   
   def is_parallel(self , otro):
     """sees if self and otro are parallel lines"""
-    return self.slope() == otro.slope
+    return self.slope() == otro.slope()
   
   def lenth(self):
     """returns lenth of line"""
@@ -84,8 +84,35 @@ class Math_Vector():
   
   def __init__(self , empieza , finaliza):
     """builds a vector that starts from empieza and ends on finaliza"""
-    self.head = empieza
-    self.end = finaliza
+    if (empieza == finaliza):
+      raise ValueError("the two points should be different")
+    self.head = empieza # The place where the vector points to
+    self.end = finaliza # The point where the vector starts from
+    
+  def __eq__(self , otro):
+    return self.head == otro.head and self.end == otro.end
+  
+  def __ne__(self , otro):
+    return !(self == otro)
+  
+  def __neg__(self):
+    newvector = Math_Vector(self.end , self.head)
+    return newvector
+  
+  def __pos__(self):
+    return self
+  
+  def move(self , x , y):
+    self.head.x_coord += x
+    self.head.y_coord += y
+    self.end.x_coord += x
+    self.end.y_coord += y
+  
+  def replace_head(self , new_head):
+    self.head = new_head
+    
+  def replace_end(self , new_end):
+    self.end = new_end
 
 def create_line (puntoa , puntob):
   return Line(puntoa , puntob)
