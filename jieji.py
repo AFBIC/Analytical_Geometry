@@ -12,6 +12,7 @@ def swap(arguno , argdos):
 class Point():
   """2d point on decartian plane"""
   
+  
   def __init__(self , x=0 , y=0):
     self.x_coord = x
     self.y_coord = y
