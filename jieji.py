@@ -2,7 +2,6 @@
 # The name was just for convenience.
 import matplotlib
 import math
-import exeption
 from matplotlib import pyplot as plt
 
 def swap(arguno , argdos):
@@ -28,7 +27,7 @@ class Point():
     return (self.x_coord == other.x_coord and self.y_coord == other.y_coord)
   
   def __ne__(self , other):
-    return !(self == other)
+    return not (self == other)
   
   def distance(self , other):
     """gets distance between 2 points self and other"""
@@ -59,12 +58,13 @@ class Line():
     return self.p1 == otro.p1 and self.p2 == otro.p2
   
   def __ne__(self , otro):
-    return !(self == otro)
+    return not (self == otro)
   
   def slope(self):
     if (self.p1.x_coord == self.p2.x_coord):
       return float("inf")
-    else return (self.p1.y_coord - self.p2.y_coord) / (self.p1.x_coord - self.p2.x_coord)
+    else:
+     return (self.p1.get_y() - self.p2.get_y()) / (self.p1.get_x() - self.p2.get_x())
   
   def is_parallel(self , otro):
     """sees if self and otro are parallel lines"""
@@ -82,37 +82,10 @@ class Line():
 class Math_Vector():
   """2d math vector"""
   
-  def __init__(self , empieza , finaliza):
-    """builds a vector that starts from empieza and ends on finaliza"""
-    if (empieza == finaliza):
-      raise ValueError("the two points should be different")
-    self.head = empieza # The place where the vector points to
-    self.end = finaliza # The point where the vector starts from
-    
-  def __eq__(self , otro):
-    return self.head == otro.head and self.end == otro.end
-  
-  def __ne__(self , otro):
-    return !(self == otro)
-  
-  def __neg__(self):
-    newvector = Math_Vector(self.end , self.head)
-    return newvector
-  
-  def __pos__(self):
-    return self
-  
-  def move(self , x , y):
-    self.head.x_coord += x
-    self.head.y_coord += y
-    self.end.x_coord += x
-    self.end.y_coord += y
-  
-  def replace_head(self , new_head):
-    self.head = new_head
-    
-  def replace_end(self , new_end):
-    self.end = new_end
+  def __init__(self , radian , mag):
+  	"""radian represents the angle in the polar plane;
+  	   mag is the magnitude"""
+  	
 
 def create_line (puntoa , puntob):
   return Line(puntoa , puntob)

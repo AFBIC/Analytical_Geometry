@@ -1,4 +1,5 @@
 # analitical physics
+import jieji
 
 class Mass():
   def __init__(self,mass,ratio_high=1,ratio_low=1)
