@@ -9,6 +9,8 @@ def swap(arguno , argdos):
   arguno = argdos
   argdos = temp
 
+
+
 class Point():
   """2d point on decartian plane"""
   
@@ -44,8 +46,8 @@ class Point():
     """This should be able to produce sth on a canvas but I don't know if it will work"""
     plt.scatter(self.x_coord,self.y_coord)
 
-class Line():
-  """2d line defined by 2 points"""
+class Line_Segment():
+  """2d line segement defined by 2 points"""
   
   def __init__(self , alpha , beta):
     """Initializers should be points."""
@@ -86,6 +88,54 @@ class Math_Vector():
   	"""radian represents the angle in the polar plane;
   	   mag is the magnitude"""
   	
+class Circle():
+  """a circle defined by the center and radius"""
+  
+  def __init__(self , center , radius):
+    self.center = center
+    self.radius = radius
+  
+  def __eq__(self , otro):
+    """
+    note: this only checks if the two are equal in normal geometry terms.
+    It does not checkif the centers are on the same point.
+    If you wnat checking against the center, use All_Equal.
+    """
+    return self.radius == otro.radius
+  
+  def __ne__(self , otro):
+    return not self == otro
+  
+  def All_Equal(self , otro):
+    return self == otro and self.center == otro.center
+  
+  def Expr(self):
+    absx = math.abs(self.center.x_coord)
+    absy = math.abs(self.center.y_coord)
+    if (self.center.x_coord == 0):
+      if (self.center.y_coord == 0):
+        return ("x ** 2 + y ** 2 = " + str(self.radius) + " ** 2")
+      elif (self.center.y_coord > 0):
+        return ("x ** 2 + (y - " + str(absy) + ") ** 2 = " + str(self.radius) + " ** 2")
+      else: 
+        return ("x ** 2 + (y + " + str(absy) + ") ** 2 = " + str(self.radius) + " ** 2")
+    elif (self.center.x_coord > 0):
+      if (self.center.y_coord == 0):
+        return ("(x - " + str(absx) + ") ** 2 + y ** 2 = " + str(self.radius) + " ** 2")
+      elif (self.center.y_coord > 0):
+        return ("(x - " + str(absx) + "(y - " + str(absy) + ") ** 2 = " + str(self.radius) + " ** 2")
+      elif (self.center.y_coord < 0):
+        return ("(x - " + str(absx) + "(y + " + str(absy) + ") ** 2 = " + str(self.radius) + " ** 2")
+    elif (self.center.x_coord < 0):
+      if (self.center.y_coord == 0):
+        return ("(x + " + str(absx) + ") ** 2 + y ** 2 = " + str(self.radius) + " ** 2")
+      elif (self.center.y_coord > 0):
+        return ("(x + " + str(absx) + "(y - " + str(absy) + ") ** 2 = " + str(self.radius) + " ** 2")
+      elif (self.center.y_coord < 0):
+        return ("(x + " + str(absx) + "(y + " + str(absy) + ") ** 2 = " + str(self.radius) + " ** 2")
+  
+  def __str__(self):
+    return self.Expr()
 
 def create_line (puntoa , puntob):
   return Line(puntoa , puntob)
