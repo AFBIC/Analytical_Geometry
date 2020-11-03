@@ -1,18 +1,30 @@
 # analitical physics
 import jieji
 
-class Mass():
-  def __init__(self,mass,ratio_high=1,ratio_low=1)
-    self.mass=mass
-    self.ratio_high=ratio_high
-    self.ratio_low=ratio_low
+class Force():
+  """
+  A force.
+  Note that the force is stray. It does not do anything to any object.
+  It only has a direction and magnitude, and can be binded to an obj.
+  """
+  def __init__(self,vector):
+    """
+    _vector is a vactor, which has a direction and magnitude
+    """
+    self._vector = vector
+    
+  def increase(self,increase_by)
+    self.vector.magnitude += increase_by
+  
+
 
 class Mass_Point():
   
-  def __init__(self,x=0,y=0,z=0,mass=Mass(0),speed=Speed(0),accel=Accel(0)):
+  def __init__(self,mass,x=0,y=0,z=0):
     self.x=x
     self.y=y
     self.z=z
     self.mass=mass
-    self.speed=speed
-    self.accel
+  
+  def Apply_Force(self,Force):
+    pass
