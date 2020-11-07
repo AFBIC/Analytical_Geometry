@@ -1,15 +1,36 @@
 # Analitical (and also normal) geometry library for python
+# (c) Zaiyou Xue, 2020
 # The name was just for convenience.
 import matplotlib
 import math
+import sympy
 from matplotlib import pyplot as plt
 
+"""
+Type traits helper funcs with C++-like names
+"""
+def Is_integral(arg):
+	return True if type(arg) == int else False
+
+def Is_arithmetic(arg):
+	flag = (type(arg) == int or type(arg) == float)
+	return flag
+
 def swap(arguno , argdos):
-  temp = arguno
-  arguno = argdos
-  argdos = temp
+    """helper function to swap the value of two variables"""
+    temp = arguno
+    arguno = argdos
+    argdos = temp
 
-
+def with_symbol(a):
+	assert(Is_arithmetic(a))
+	if(a == 0):
+		return "0"
+	elif(a < 0):
+		return f"-{a}"
+	else:
+		return f"+{a}"
+		
 
 class Point():
   """2d point on decartian plane"""
@@ -87,56 +108,43 @@ class Math_Vector():
   def __init__(self , radian , mag):
   	"""radian represents the angle in the polar plane;
   	   mag is the magnitude"""
-  	
+
 class Circle():
-  """a circle defined by the center and radius"""
+	"""a circle defined by the center and radius"""
   
-  def __init__(self , center , radius):
-    self.center = center
-    self.radius = radius
+	def __init__(self , center , radius):
+		self.center = center
+		self.radius = radius
   
-  def __eq__(self , otro):
-    """
-    note: this only checks if the two are equal in normal geometry terms.
-    It does not checkif the centers are on the same point.
-    If you wnat checking against the center, use All_Equal.
-    """
-    return self.radius == otro.radius
+	def __eq__(self , otro):
+		"""
+		note: this only checks if the two are equal in normal geometry terms.
+		It does not checkif the centers are on the same point.
+		If you wnat checking against the center, use All_Equal.
+    	"""
+		return self.radius == otro.radius
   
-  def __ne__(self , otro):
-    return not self == otro
+	def __ne__(self , otro):
+		return not self == otro
   
-  def All_Equal(self , otro):
-    return self == otro and self.center == otro.center
-  
-  def Expr(self):
-    absx = math.abs(self.center.x_coord)
-    absy = math.abs(self.center.y_coord)
-    if (self.center.x_coord == 0):
-      if (self.center.y_coord == 0):
-        return ("x ** 2 + y ** 2 = " + str(self.radius) + " ** 2")
-      elif (self.center.y_coord > 0):
-        return ("x ** 2 + (y - " + str(absy) + ") ** 2 = " + str(self.radius) + " ** 2")
-      else: 
-        return ("x ** 2 + (y + " + str(absy) + ") ** 2 = " + str(self.radius) + " ** 2")
-    elif (self.center.x_coord > 0):
-      if (self.center.y_coord == 0):
-        return ("(x - " + str(absx) + ") ** 2 + y ** 2 = " + str(self.radius) + " ** 2")
-      elif (self.center.y_coord > 0):
-        return ("(x - " + str(absx) + "(y - " + str(absy) + ") ** 2 = " + str(self.radius) + " ** 2")
-      elif (self.center.y_coord < 0):
-        return ("(x - " + str(absx) + "(y + " + str(absy) + ") ** 2 = " + str(self.radius) + " ** 2")
-    elif (self.center.x_coord < 0):
-      if (self.center.y_coord == 0):
-        return ("(x + " + str(absx) + ") ** 2 + y ** 2 = " + str(self.radius) + " ** 2")
-      elif (self.center.y_coord > 0):
-        return ("(x + " + str(absx) + "(y - " + str(absy) + ") ** 2 = " + str(self.radius) + " ** 2")
-      elif (self.center.y_coord < 0):
-        return ("(x + " + str(absx) + "(y + " + str(absy) + ") ** 2 = " + str(self.radius) + " ** 2")
-  
-  def __str__(self):
-    return self.Expr()
+	def All_Equal(self , otro):
+		return self == otro and self.center == otro.center
+    
+	def Expr(self):
+		xsymb = sympy.Symbol("x")
+		ysymb = sympy.Symbol("y")
+		expr = (xsymb + self.center.x_coord) ** 2 + (ysymb + self.center.y_coord) ** 2 - self.radius
+		return expr
+    
+	def __str__(self):
+		return self.Expr()
 
 def create_line (puntoa , puntob):
-  return Line(puntoa , puntob)
+	return Line(puntoa , puntob)
+
+def main():
+	pass
+
+if __name__ == '__main__':
+	main()
 
