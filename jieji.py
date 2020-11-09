@@ -103,11 +103,27 @@ class Line_Segment():
     plt.plot(x,y)
 
 class Math_Vector():
-  """2d math vector"""
-  
-  def __init__(self , radian , mag):
-  	"""radian represents the angle in the polar plane;
-  	   mag is the magnitude"""
+    """2d math vector"""
+    
+    def __init__(self , x , y):
+        self.x = x
+	self.y = y
+    
+    def __add__(self , other):
+	    return Math_Vector ( self.x + other.x , self.y + other.y )
+	
+	def __neg__(self):
+		return Math_Vector (-self.x , -self.y)
+	
+	def __pos__(self):
+		return self
+	
+	def __sub__(self , other):
+		return -self + other
+	
+	def __mul__(self , other):
+		if (Is_arithmetic(other)):
+			return Math_Vector ( self.x * other , self.y * other )
 
 class Circle():
 	"""a circle defined by the center and radius"""
@@ -133,7 +149,7 @@ class Circle():
 	def Expr(self):
 		xsymb = sympy.Symbol("x")
 		ysymb = sympy.Symbol("y")
-		expr = (xsymb + self.center.x_coord) ** 2 + (ysymb + self.center.y_coord) ** 2 - self.radius
+		expr = (xsymb + self.center.x_coord) ** 2 + (ysymb + self.center.y_coord) ** 2 - self.radius ** 2
 		return expr
     
 	def __str__(self):
