@@ -112,28 +112,28 @@ class Math_Vector():
     def __add__(self , other):
 	    return Math_Vector ( self.x + other.x , self.y + other.y )
 	
-	def __neg__(self):
-		return Math_Vector (-self.x , -self.y)
+    def __neg__(self):
+	    return Math_Vector (-self.x , -self.y)
 	
-	def __pos__(self):
-		return self
-	
-	def __sub__(self , other):
-		return -self + other
-	
-	def __mul__(self , other):
-		if (Is_arithmetic(other)):
-			return Math_Vector ( self.x * other , self.y * other )
+    def __pos__(self):
+	    return self
+    
+    def __sub__(self , other):
+	    return -self + other
+    
+    def __mul__(self , other):
+	    if (Is_arithmetic(other)):
+	        return Math_Vector ( self.x * other , self.y * other )
 
 class Circle():
 	"""a circle defined by the center and radius"""
   
-	def __init__(self , center , radius):
+    def __init__(self , center , radius):
 		self.center = center
 		self.radius = radius
   
-	def __eq__(self , otro):
-		"""
+    def __eq__(self , otro):
+    	"""
 		note: this only checks if the two are equal in normal geometry terms.
 		It does not checkif the centers are on the same point.
 		If you wnat checking against the center, use All_Equal.
