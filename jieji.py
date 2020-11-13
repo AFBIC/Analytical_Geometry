@@ -1,5 +1,13 @@
 # Analitical (and also normal) geometry library for python
 # (c) Zaiyou Xue, 2020
+# Released under the MIT license.
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
 # The name was just for convenience.
 import matplotlib
 import math
@@ -54,7 +62,6 @@ class Point():
   
   def distance(self , other):
     """gets distance between 2 points self and other"""
-    
     return math.sqrt(((self.x_coord - other.x_coord)**2) + ((self.y_coord - other.y_coord)**2))
   
   def move(self , x=0 , y=0):
@@ -66,6 +73,9 @@ class Point():
   def plot(self):
     """This should be able to produce sth on a canvas but I don't know if it will work"""
     plt.scatter(self.x_coord,self.y_coord)
+
+def distance(a,b):
+    return a.distance(b)
 
 class Line_Segment():
   """2d line segement defined by 2 points"""
@@ -101,6 +111,9 @@ class Line_Segment():
     x = [self.p1.x_coord , self.p2.x_coord]
     y = [self.p2.y_coord , self.p2.y_coord]
     plt.plot(x,y)
+
+def create_line (puntoa , puntob):
+	return Line(puntoa , puntob)
 
 class Math_Vector():
     """2d math vector"""
@@ -155,8 +168,31 @@ class Circle():
 	def __str__(self):
 		return self.Expr()
 
-def create_line (puntoa , puntob):
-	return Line(puntoa , puntob)
+class Quadrilateral():
+    def __init__(self , a , b , c , d):
+        self.points = [a,b,c,d]
+    
+    def Circumference(self):
+        return (distance(a,b) + distance(b,c) + distance(c,d) + distance(d,a))
+    
+    def All_Equal(self , other):
+        return self.points = other.points
+
+class Triangle():
+    def __init__(self,a,b,c):
+        self.points = [a,b,c]
+    
+    def Sides(self):
+        toa = distance(b,c)
+        tob = distance(a,c)
+        toc = distance(a,b)
+        return [toa , tob , toc]
+    
+    def All_Equal(self , other):
+        return self.points = other.points
+
+def All_Equal(a,b):
+    return a.All_Equal(b)
 
 def main():
 	pass
