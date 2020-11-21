@@ -120,7 +120,7 @@ class Math_Vector():
     
     def __init__(self , x , y):
         self.x = x
-	    self.y = y
+        self.y = y
     
     def __add__(self , other):
 	    return Math_Vector ( self.x + other.x , self.y + other.y )
@@ -141,21 +141,21 @@ class Math_Vector():
 class Circle():
 	"""a circle defined by the center and radius"""
   
-    def __init__(self , center , radius):
+	def __init__(self , center , radius):
 		self.center = center
 		self.radius = radius
   
-    def __eq__(self , otro):
-    	"""
+	def __eq__(self , otro):
+		"""
 		note: this only checks if the two are equal in normal geometry terms.
 		It does not checkif the centers are on the same point.
 		If you wnat checking against the center, use All_Equal.
-    	"""
+		"""
 		return self.radius == otro.radius
-  
+
 	def __ne__(self , otro):
 		return not self == otro
-  
+
 	def All_Equal(self , otro):
 		return self == otro and self.center == otro.center
     
@@ -164,7 +164,7 @@ class Circle():
 		ysymb = sympy.Symbol("y")
 		expr = (xsymb + self.center.x_coord) ** 2 + (ysymb + self.center.y_coord) ** 2 - self.radius ** 2
 		return expr
-    
+	
 	def __str__(self):
 		return self.Expr()
 
@@ -176,7 +176,7 @@ class Quadrilateral():
         return (distance(a,b) + distance(b,c) + distance(c,d) + distance(d,a))
     
     def All_Equal(self , other):
-        return self.points = other.points
+        return self.points == other.points
 
 class Triangle():
     def __init__(self,a,b,c):
@@ -189,7 +189,7 @@ class Triangle():
         return [toa , tob , toc]
     
     def All_Equal(self , other):
-        return self.points = other.points
+        return self.points == other.points
 
 def All_Equal(a,b):
     return a.All_Equal(b)
