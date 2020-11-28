@@ -2,8 +2,10 @@
 An analytical geometry repo in python
 
 ## Contributors
-|Name|Ammount|
-|Shane Xue|150|
+#### jieji.py
+|Name     |Contributions  |
+|:-------:|:-------------:|
+|Shane Xue|202 lines      |
 
 ## Director
 Shane Xue is in charge of this project.
